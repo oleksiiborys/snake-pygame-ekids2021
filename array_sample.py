@@ -37,7 +37,6 @@ def show_message(pos_x, pos_y, msg, color):
     dis.blit(rendered_message, [pos_x, pos_y])
 
 
-game_over = False
 for message in messages:
     for i in range(0, pause):
         for event in pygame.event.get():
