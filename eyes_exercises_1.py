@@ -11,7 +11,7 @@ pygame.display.set_caption('Eyes exercises for eKids')
 
 radius = 40
 delay = 3
-center_positions = [(50, 70), (120, 90), (170, 60), (340, 200), (110, 700), (690, 300),
+center_positions = [(50, 70), (720, 490), (170, 260), (340, 200), (110, 700), (690, 300),
                     (random.randint(radius, dis_width-radius), random.randint(radius, dis_height-radius)),
                     (random.randint(radius, dis_width-radius), random.randint(radius, dis_height-radius)),
                     (random.randint(radius, dis_width-radius), random.randint(radius, dis_height-radius))]
