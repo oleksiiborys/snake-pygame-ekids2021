@@ -25,7 +25,7 @@ score_font = pygame.font.SysFont("comicsansms", 35)
 
 def message(msg, color):
     rendered_message = font_style.render(msg, True, color)
-    dis.blit(rendered_message, [50, 50])
+    dis.blit(rendered_message, [dis_width / 6, dis_height / 3])
 
 
 def gameLoop():  # creating a function
