@@ -22,6 +22,10 @@ clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
 
+def your_score(score):
+    value = score_font.render("Your Score: " + str(score), True, yellow)
+    dis.blit(value, [0, 0])
+
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
@@ -97,6 +101,7 @@ def gameLoop():  # creating a function
                 game_close = True
 
         draw_our_snake(snake_block, snake_list)
+        your_score(length_of_snake - 1)
 
         pygame.display.update()
 

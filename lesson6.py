@@ -91,10 +91,9 @@ def gameLoop():  # creating a function
         snake_list.append(snake_head)
         if len(snake_list) > length_of_snake:
             del snake_list[0]
-
         for x in snake_list[:-1]:
             if x == snake_head:
-                game_close = True
+                game_over = True
 
         draw_our_snake(snake_block, snake_list)
 
