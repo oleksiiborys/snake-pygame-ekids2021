@@ -22,7 +22,7 @@ def fun1(x):
     return x*x
 
 def fun2(x):
-    return x*x*x
+    return x**0.5
 
 def fun3(x):
     return 1/x
@@ -30,13 +30,21 @@ def fun3(x):
 def fun4(x):
     return 10/x
 
+def fun5(x):
+    return x
+
+def fun6(x):
+    return 500-x
+
 
 array = [
     [fun0, light_blue, 5],
     [fun1, yellow, 5],
-    [fun2, red, 5],
+    [fun2, red, 0.05],
     [fun3, blue, 5000],
-    [fun4, white, 5000]
+    [fun4, white, 5000],
+    [fun5, green, 1],
+    [fun6, green, 1]
 ]
 for func,color,scale in array:
     res = []
@@ -48,9 +56,9 @@ for func,color,scale in array:
     print(res)
     for i in range(1, len(res)):
         x,y = res[i]
-        prev_x,prev_y = res[i-1]
-        # pygame.draw.rect(dis, color, [x,dis_height - y, 1, 1])
-        pygame.draw.line(dis, color, [x,dis_height - y], [prev_x,dis_height - prev_y])
+        # prev_x,prev_y = res[i-1]
+        pygame.draw.rect(dis, color, [x,dis_height - y, 1, 1])
+        # pygame.draw.line(dis, color, [x,dis_height - y], [prev_x,dis_height - prev_y])
 
 
 pygame.display.update()
