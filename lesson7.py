@@ -46,8 +46,8 @@ def gameLoop():  # creating a function
 
     snake_list = []
     length_of_snake = 1
-    food_x = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-    food_y = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+    food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
+    food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
 
     while not game_close:
 
@@ -113,8 +113,8 @@ def gameLoop():  # creating a function
 
         if x1 == food_x and y1 == food_y:
             print("Yummy!!")
-            food_x = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-            food_y = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+            food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
+            food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
 
         clock.tick(snake_speed)

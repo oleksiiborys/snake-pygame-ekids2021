@@ -16,19 +16,25 @@ pygame.init()
 dis = pygame.display.set_mode(size=(dis_width, dis_height))
 pygame.display.set_caption("Snake game for EKIDS2021")
 
-snake_block = 10
-snake_speed = 15
+snake_block = 20
+snake_speed = 10
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
+apple_sound = pygame.mixer.Sound('assets/sound/apple.wav')
+game_over_sound = pygame.mixer.Sound('assets/sound/gameover.wav')
+snake_head_img = pygame.image.load('assets/img/head.png')
+snake_body_img = pygame.image.load('assets/img/body.png')
+
 
 def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [25,25])
 
 def draw_our_snake(snake_block, snake_list):
-    for x in snake_list:
-        pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
+    for x in snake_list[0:-1]:
+        dis.blit(snake_body_img, (x[0], x[1]))
+    dis.blit(snake_head_img, (snake_list[-1][0], snake_list[-1][1]))
 
 def message(msg, color):
     rendered_message = font_style.render(msg, True, color)
@@ -46,8 +52,8 @@ def gameLoop():  # creating a function
 
     snake_list = []
     length_of_snake = 1
-    food_x = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-    food_y = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+    food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
+    food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
 
     while not game_close:
 
@@ -104,6 +110,7 @@ def gameLoop():  # creating a function
 
         for x in snake_list[:-1]:
             if x == snake_head:
+                game_over_sound.play()
                 game_over = True
 
         draw_our_snake(snake_block, snake_list)
@@ -113,8 +120,9 @@ def gameLoop():  # creating a function
 
         if x1 == food_x and y1 == food_y:
             print("Yummy!!")
-            food_x = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-            food_y = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+            apple_sound.play()
+            food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
+            food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
 
         clock.tick(snake_speed)
