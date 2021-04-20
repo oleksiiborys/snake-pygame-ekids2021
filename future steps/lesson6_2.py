@@ -24,11 +24,12 @@ score_font = pygame.font.SysFont("comicsansms", 35)
 
 def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
-    dis.blit(value, [0, 0])
+    dis.blit(value, [25,25])
 
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
+    pygame.draw.rect(dis, red, [snake_list[len(snake_list)-1][0], snake_list[len(snake_list)-1][1], snake_block, snake_block])
 
 def message(msg, color):
     rendered_message = font_style.render(msg, True, color)
@@ -104,7 +105,7 @@ def gameLoop():  # creating a function
 
         for x in snake_list[:-1]:
             if x == snake_head:
-                game_close = True
+                game_over = True
 
         draw_our_snake(snake_block, snake_list)
         your_score(length_of_snake - 1)
