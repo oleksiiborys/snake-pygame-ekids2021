@@ -1,6 +1,7 @@
 import pygame
 import time
 import random
+from assets import fruits
 
 white = (255, 255, 255)
 yellow = (255, 255, 102)
@@ -28,22 +29,6 @@ apple_sound = pygame.mixer.Sound('assets/sound/apple.wav')
 game_over_sound = pygame.mixer.Sound('assets/sound/gameover.wav')
 snake_head_img = pygame.image.load('assets/img/head.png')
 snake_body_img = pygame.image.load('assets/img/body.png')
-fruits_imgs = [
-    pygame.image.load('assets/img/apple1.png'),
-    pygame.image.load('assets/img/apple2.png'),
-    pygame.image.load('assets/img/apple3.png'),
-    pygame.image.load('assets/img/banana.png'),
-    pygame.image.load('assets/img/body.png'),
-    pygame.image.load('assets/img/bomb.png'),
-    pygame.image.load('assets/img/head.png'),
-    pygame.image.load('assets/img/orange.png'),
-    pygame.image.load('assets/img/pear1.png'),
-    pygame.image.load('assets/img/pineapple.png'),
-    pygame.image.load('assets/img/plum.png'),
-    pygame.image.load('assets/img/skull.png'),
-    pygame.image.load('assets/img/strawberry.png'),
-    pygame.image.load('assets/img/watermelon.png')
-]
 
 
 def your_score(score):
@@ -121,7 +106,7 @@ def gameLoop():  # creating a function
         x1 += x1_change
         y1 += y1_change
         dis.fill(blue)
-        dis.blit(fruits_imgs[current_fruit], (food_x, food_y))
+        dis.blit(fruits.images[current_fruit], (food_x, food_y))
         snake_head = []
         snake_head.append(x1)
         snake_head.append(y1)
@@ -142,7 +127,7 @@ def gameLoop():  # creating a function
         if x1 == food_x and y1 == food_y:
             print("Yummy!!")
             apple_sound.play()
-            current_fruit = random.randrange(0, len(fruits_imgs))
+            current_fruit = random.randrange(0, len(fruits.images))
             food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
