@@ -15,7 +15,7 @@ dis = pygame.display.set_mode(size=(dis_width, dis_height))
 pygame.display.set_caption("Snake game for EKIDS2021")
 
 snake_block = 10
-snake_speed = 30
+snake_speed = 20
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont(None, 50)
 
@@ -35,7 +35,7 @@ def gameLoop():  # creating a function
     y1_change = 0
 
     foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-    foody = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
+    foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
 
     while not game_close:
 
