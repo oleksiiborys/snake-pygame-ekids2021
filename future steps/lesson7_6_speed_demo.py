@@ -20,7 +20,8 @@ icon = pygame.image.load('assets/img/head.png')
 pygame.display.set_icon(icon)
 
 snake_block = 20
-snake_speed = 10
+initial_snake_speed = 10
+
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
@@ -48,6 +49,7 @@ def gameLoop():  # creating a function
     game_over = False
     game_close = False
     current_fruit = 0
+    snake_speed = initial_snake_speed
 
     x1 = dis_width / 2
     y1 = dis_height / 2
@@ -92,30 +94,29 @@ def gameLoop():  # creating a function
                     y1_change = snake_block
                     x1_change = 0
 
+        if x1 >= dis_width:
+            x1 = 0
+        elif x1 < 0:
+            x1 = dis_width
+        elif y1 < 0:
+            y1 = dis_height
+        elif y1 >= dis_height:
+            y1 = -snake_block
+
+        # region demo mode
         if x1 == (dis_width - snake_block) and x1_change == snake_block:
-            print(1)
             x1_change = 0
             y1_change = snake_block
         elif x1 == (dis_width - snake_block) and x1_change == 0 and y1_change == snake_block:
-            print(2)
             x1_change = -snake_block
             y1_change = 0
         elif x1 == 0 and x1_change == -snake_block:
-            print(3)
             x1_change = 0
             y1_change = snake_block
         elif x1 == 0 and x1_change == 0 and y1_change == snake_block:
-            print(4)
             x1_change = snake_block
             y1_change = 0
-
-        # if x1 == 0:
-        #     x1_change = 0
-        #     y1_change = snake_block
-        if y1 >= dis_height:
-            y1 = 0
-        if y1 < 0:
-            y1 = dis_height
+        # region demo mode - end
 
         x1 += x1_change
         y1 += y1_change
@@ -131,7 +132,7 @@ def gameLoop():  # creating a function
         for x in snake_list[:-1]:
             if x == snake_head:
                 game_over_sound.play()
-                game_over = True
+                game_over = False
 
         draw_our_snake(snake_block, snake_list)
         your_score(length_of_snake - 1)
@@ -145,6 +146,7 @@ def gameLoop():  # creating a function
             food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
+            snake_speed +=1
 
         clock.tick(snake_speed)
 
