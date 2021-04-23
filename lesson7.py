@@ -24,6 +24,7 @@ clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
 
+
 def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [25,25])
@@ -32,6 +33,7 @@ def your_score(score):
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
+
 
 def message(msg, color):
     rendered_message = font_style.render(msg, True, color)

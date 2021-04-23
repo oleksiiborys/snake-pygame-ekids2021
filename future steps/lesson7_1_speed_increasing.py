@@ -18,11 +18,12 @@ pygame.init()
 dis = pygame.display.set_mode(size=(dis_width, dis_height))
 pygame.display.set_caption("Snake game for EKIDS2021")
 
-snake_block = 20
-initial_snake_speed = 10
+snake_block = 10
+initial_snake_speed = 15
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
+
 
 def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)

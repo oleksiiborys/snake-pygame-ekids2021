@@ -35,6 +35,7 @@ def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [25,25])
 
+
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list[0:-1]:
         dis.blit(snake_body_img, (x[0], x[1]))
