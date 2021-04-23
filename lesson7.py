@@ -9,6 +9,8 @@ green = (0, 255, 0)
 blue = (50, 153, 213)
 light_blue = (96, 148, 188)
 red = (213, 50, 80)
+orange = (255, 165, 48)
+violet = (117, 48, 255)
 
 dis_width = 800
 dis_height = 600
@@ -25,6 +27,7 @@ score_font = pygame.font.SysFont("comicsansms", 35)
 def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [25,25])
+
 
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list:

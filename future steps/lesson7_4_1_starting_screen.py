@@ -9,6 +9,8 @@ green = (0, 255, 0)
 blue = (50, 153, 213)
 light_blue = (96, 148, 188)
 red = (213, 50, 80)
+orange = (255, 165, 48)
+violet = (117, 48, 255)
 
 dis_width = 800
 dis_height = 600
@@ -17,7 +19,7 @@ dis = pygame.display.set_mode(size=(dis_width, dis_height))
 pygame.display.set_caption("Snake game for EKIDS2021")
 
 snake_block = 10
-snake_speed = 15
+initial_snake_speed = 15
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
@@ -29,19 +31,38 @@ def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [25,25])
 
+
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list[0:-1]:
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
     pygame.draw.rect(dis, red, [snake_list[-1][0], snake_list[-1][1], snake_block, snake_block])
+
 
 def message(msg, color):
     rendered_message = font_style.render(msg, True, color)
     dis.blit(rendered_message, [dis_width / 6, dis_height / 3])
 
 
+def starting_screen():
+    while True:
+        for i in range(-10, 1):
+            dis.fill(orange)
+            message("Game will start in: " + str(i*(-1)) + " or press r to run the game", violet)
+            pygame.display.update()
+            time.sleep(1)
+            if i == 0:
+                gameLoop()
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        gameLoop()
+
+
 def gameLoop():  # creating a function
     game_over = False
     game_close = False
+    snake_speed = initial_snake_speed
 
     x1 = dis_width / 2
     y1 = dis_height / 2
@@ -122,6 +143,7 @@ def gameLoop():  # creating a function
             food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
+            snake_speed += 1
 
         clock.tick(snake_speed)
 
@@ -129,4 +151,5 @@ def gameLoop():  # creating a function
     quit()
 
 
-gameLoop()
+starting_screen()
+# gameLoop()
