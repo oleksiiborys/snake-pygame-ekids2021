@@ -9,6 +9,8 @@ green = (0, 255, 0)
 blue = (50, 153, 213)
 light_blue = (96, 148, 188)
 red = (213, 50, 80)
+orange = (255, 165, 48)
+violet = (117, 48, 255)
 
 dis_width = 800
 dis_height = 600
@@ -23,17 +25,36 @@ font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
 background_img = pygame.image.load("assets/img/sand1.jpg")
 
+
 def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [25,25])
+
 
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list:
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
 
+
 def message(msg, color):
     rendered_message = font_style.render(msg, True, color)
     dis.blit(rendered_message, [dis_width / 6, dis_height / 3])
+
+
+def starting_screen():
+    while True:
+        for i in range(-10, 1):
+            dis.fill(orange)
+            message("Game will start in: " + str(i*(-1)) + " or press r to run the game", violet)
+            pygame.display.update()
+            time.sleep(1)
+            if i == 0:
+                gameLoop()
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_r:
+                        gameLoop()
 
 
 def gameLoop():  # creating a function
@@ -94,7 +115,6 @@ def gameLoop():  # creating a function
 
         x1 += x1_change
         y1 += y1_change
-        #dis.fill(light_blue)
         dis.blit(background_img, [0, 0])
         pygame.draw.rect(dis, green, [food_x, food_y, snake_block, snake_block])
         snake_head = []
@@ -125,4 +145,5 @@ def gameLoop():  # creating a function
     quit()
 
 
-gameLoop()
+starting_screen()
+# gameLoop()
