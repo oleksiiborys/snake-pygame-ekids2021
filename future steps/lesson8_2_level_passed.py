@@ -19,11 +19,14 @@ dis = pygame.display.set_mode(size=(dis_width, dis_height))
 pygame.display.set_caption("Snake game for EKIDS2021")
 
 snake_block = 10
-snake_speed = 15
+initial_snake_speed = 15
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
-background_img = pygame.image.load('assets/img/sand1.jpg')
+background_img = pygame.image.load("assets/img/sand1.jpg")
+apple_sound = pygame.mixer.Sound('assets/sound/apple.wav')
+game_over_sound = pygame.mixer.Sound('assets/sound/gameover.wav')
+level_up_sound = pygame.mixer.Sound('assets/sound/level_up.mp3')
 
 
 def your_score(score):
@@ -32,7 +35,7 @@ def your_score(score):
 
 
 def draw_our_snake(snake_block, snake_list):
-    for x in snake_list[0: -1]:
+    for x in snake_list[0:-1]:
         pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
     pygame.draw.rect(dis, red, [snake_list[-1][0], snake_list[-1][1], snake_block, snake_block])
 
@@ -46,7 +49,7 @@ def starting_screen():
     while True:
         for i in range(-10, 1):
             dis.fill(orange)
-            message('Game will start in: ' + str(i*(-1)) + ' or press r to run the game', violet)
+            message("Game will start in: " + str(i*(-1)) + " or press r to run the game", violet)
             pygame.display.update()
             time.sleep(1)
             if i == 0:
@@ -58,7 +61,12 @@ def starting_screen():
                         gameLoop()
 
 
-def gameLoop():  # creating a function
+def your_level(value):
+    value = score_font.render("Your Level: " + str(value), True, yellow)
+    dis.blit(value, [25, 100])
+
+
+def gameLoop(snake_speed=initial_snake_speed):  # creating a function
     game_over = False
     game_close = False
 
@@ -69,6 +77,7 @@ def gameLoop():  # creating a function
 
     snake_list = []
     length_of_snake = 1
+    level = 1
     food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
     food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
 
@@ -127,18 +136,31 @@ def gameLoop():  # creating a function
 
         for x in snake_list[:-1]:
             if x == snake_head:
+                game_over_sound.play()
                 game_over = True
 
         draw_our_snake(snake_block, snake_list)
         your_score(length_of_snake - 1)
+        your_level(level)
 
         pygame.display.update()
 
         if x1 == food_x and y1 == food_y:
             print("Yummy!!")
+            apple_sound.play()
             food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
+            snake_speed += 1
+
+            if length_of_snake % 5 == 0:
+                level += 1
+                snake_speed += 5
+                dis.fill(light_blue)
+                message("Level passed!", violet)
+                pygame.display.update()
+                level_up_sound.play()
+                time.sleep(2)
 
         clock.tick(snake_speed)
 
@@ -147,3 +169,4 @@ def gameLoop():  # creating a function
 
 
 starting_screen()
+
