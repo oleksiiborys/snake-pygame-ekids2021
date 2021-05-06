@@ -18,8 +18,8 @@ pygame.init()
 dis = pygame.display.set_mode(size=(dis_width, dis_height))
 pygame.display.set_caption("Snake game for EKIDS2021")
 
-snake_block = 10
-initial_snake_speed = 15
+snake_block = 20
+initial_snake_speed = 10
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
@@ -27,6 +27,8 @@ background_img = pygame.image.load("assets/img/sand1.jpg")
 apple_sound = pygame.mixer.Sound('assets/sound/apple.wav')
 game_over_sound = pygame.mixer.Sound('assets/sound/gameover.wav')
 level_up_sound = pygame.mixer.Sound('assets/sound/level_up.mp3')
+snake_head_img = pygame.image.load('assets/img/head.png')
+snake_body_img = pygame.image.load('assets/img/body.png')
 
 
 def your_score(score):
@@ -36,9 +38,8 @@ def your_score(score):
 
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list[0:-1]:
-        pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
-    pygame.draw.rect(dis, red, [snake_list[-1][0], snake_list[-1][1], snake_block, snake_block])
-
+        dis.blit(snake_body_img, (x[0], x[1]))
+    dis.blit(snake_head_img, (snake_list[-1][0], snake_list[-1][1]))
 
 def message(msg, color):
     rendered_message = font_style.render(msg, True, color)
@@ -69,6 +70,7 @@ def your_level(value):
 def gameLoop(snake_speed=initial_snake_speed):  # creating a function
     game_over = False
     game_close = False
+    snake_speed = initial_snake_speed
 
     x1 = dis_width / 2
     y1 = dis_height / 2
