@@ -2,6 +2,8 @@ import pygame
 import time
 import random
 from assets import fruits
+from assets import head_and_body_imgs
+
 
 white = (255, 255, 255)
 yellow = (255, 255, 102)
@@ -31,22 +33,6 @@ level_up_sound = pygame.mixer.Sound('assets/sound/level_up.mp3')
 snake_head_img = pygame.image.load('assets/img/head.png')
 snake_body_img = pygame.image.load('assets/img/body.png')
 
-snake_head_imgs = [pygame.image.load('assets/img/head_blue.png'),
-                   pygame.image.load('assets/img/head_cyan.png'),
-                   pygame.image.load('assets/img/head_green.png'),
-                   pygame.image.load('assets/img/head_grey.png'),
-                   pygame.image.load('assets/img/head_purple.png'),
-                   pygame.image.load('assets/img/head_red.png'),
-                   pygame.image.load('assets/img/head_yellow.png')]
-
-snake_body_imgs = [pygame.image.load('assets/img/body_blue.png'),
-                   pygame.image.load('assets/img/body_cyan.png'),
-                   pygame.image.load('assets/img/body_green.png'),
-                   pygame.image.load('assets/img/body_grey.png'),
-                   pygame.image.load('assets/img/body_purple.png'),
-                   pygame.image.load('assets/img/body_red.png'),
-                   pygame.image.load('assets/img/body_yellow.png')]
-
 
 def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
@@ -55,8 +41,8 @@ def your_score(score):
 
 def draw_our_snake(snake_block, snake_list, level):
     for x in snake_list[0:-1]:
-        dis.blit(snake_body_imgs[level-1], (x[0], x[1]))
-    dis.blit(snake_head_imgs[level-1], (snake_list[-1][0], snake_list[-1][1]))
+        dis.blit(head_and_body_imgs.snake_body_imgs[level-1], (x[0], x[1]))
+    dis.blit(head_and_body_imgs.snake_head_imgs[level-1], (snake_list[-1][0], snake_list[-1][1]))
 
 def message(msg, color, pos_x=dis_width/6, pos_y=dis_height / 3):
     rendered_message = font_style.render(msg, True, color)
@@ -171,11 +157,11 @@ def gameLoop():  # creating a function
             food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
-            snake_speed += 1
+            #snake_speed += 1
 
             if length_of_snake % 5 == 0:
                 level += 1
-                snake_speed += 5
+                snake_speed += 2
                 dis.fill(light_blue)
                 message("Level passed!", violet)
                 pygame.display.update()

@@ -19,7 +19,7 @@ dis = pygame.display.set_mode(size=(dis_width, dis_height))
 pygame.display.set_caption("Snake game for EKIDS2021")
 
 snake_block = 20
-initial_snake_speed = 10
+initial_snake_speed = 5
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
@@ -153,11 +153,11 @@ def gameLoop(snake_speed=initial_snake_speed):  # creating a function
             food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
-            snake_speed += 1
+            #snake_speed += 1
 
             if length_of_snake % 5 == 0:
                 level += 1
-                snake_speed += 5
+                snake_speed += 2
                 dis.fill(light_blue)
                 message("Level passed!", violet)
                 pygame.display.update()
