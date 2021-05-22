@@ -2,7 +2,7 @@ import pygame
 import time
 import random
 from assets import fruits
-from assets import head_and_body_imgs
+from assets import snake_imgs
 
 
 white = (255, 255, 255)
@@ -41,8 +41,8 @@ def your_score(score):
 
 def draw_our_snake(snake_block, snake_list, level):
     for x in snake_list[0:-1]:
-        dis.blit(head_and_body_imgs.snake_body_imgs[level-1], (x[0], x[1]))
-    dis.blit(head_and_body_imgs.snake_head_imgs[level-1], (snake_list[-1][0], snake_list[-1][1]))
+        dis.blit(snake_imgs.bodies[level - 1], (x[0], x[1]))
+    dis.blit(snake_imgs.heads[level - 1], (snake_list[-1][0], snake_list[-1][1]))
 
 def message(msg, color, pos_x=dis_width/6, pos_y=dis_height / 3):
     rendered_message = font_style.render(msg, True, color)
