@@ -21,7 +21,7 @@ violet = (117, 48, 255)
 dis_width = 800
 dis_height = 600
 pygame.init()
-dis = pygame.display.set_mode(size=(dis_width, dis_height))  # Змінна dis - для роботи з екраном, виводу графыки
+dis = pygame.display.set_mode(size=(dis_width, dis_height))  # Змінна dis - для роботи з екраном, виводу графіки
 pygame.display.set_caption("Snake game for EKIDS2021")  # Заголовок вікна
 icon = pygame.image.load('assets/img/head.png')  # Готуємо іконку
 pygame.display.set_icon(icon)  # Встановлюємо віконку
@@ -112,7 +112,7 @@ def gameLoop(snake_speed=initial_snake_speed):
     current_fruit = 0
     bad_fruit = 0
 
-    # Початковы положення змійки - середина екрану
+    # Початкові положення змійки - середина екрану
     x1 = dis_width / 2
     y1 = dis_height / 2
     # Початковий напрямок руху змійки - 0
