@@ -2,22 +2,17 @@ import pygame
 import time
 import random
 
-white = (255, 255, 255)
-yellow = (255, 255, 102)
-black = (0, 0, 0)
-green = (0, 255, 0)
-blue = (50, 153, 213)
-light_blue = (96, 148, 188)
-red = (213, 50, 80)
 
 dis_width = 800
 dis_height = 600
-pygame.init()
-dis = pygame.display.set_mode(size=(dis_width, dis_height))
-pygame.display.set_caption("Snake game for EKIDS2021")
 
-snake_block = 10
+pygame.init()
+dis = pygame.display.set_mode(size = (dis_width, dis_height))
+
+pygame.display.set_caption('Snake game for eKids')
+
 snake_speed = 15
+snake_block = 10
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
@@ -30,6 +25,13 @@ def message(msg, color):
     rendered_message = font_style.render(msg, True, color)
     dis.blit(rendered_message, [dis_width / 6, dis_height / 3])
 
+white = (255, 255, 255)
+yellow = (255, 255, 102)
+black = (0, 0, 0)
+green = (0, 255, 0)
+blue = (50, 153, 213)
+light_blue = (96, 148, 188)
+red = (213, 50, 80)
 
 def gameLoop():  # creating a function
     game_over = False
@@ -81,8 +83,8 @@ def gameLoop():  # creating a function
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
             game_over = True
 
-        x1 += x1_change
-        y1 += y1_change
+        x1 = x1 + x1_change
+        y1 = y1 + y1_change
         dis.fill(light_blue)
         pygame.draw.rect(dis, green, [food_x, food_y, snake_block, snake_block])
         snake_head = []

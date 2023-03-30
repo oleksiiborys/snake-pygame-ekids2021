@@ -13,8 +13,8 @@ red = (213, 50, 80)
 dis_width = 800
 dis_height = 600
 pygame.init()
-dis = pygame.display.set_mode(size=(dis_width, dis_height))
-pygame.display.set_caption("Snake game for EKIDS2021")
+dis = pygame.display.set_mode(size = (dis_width, dis_height))
+pygame.display.set_caption('Snake game for eKids')
 
 snake_block = 10
 snake_speed = 15

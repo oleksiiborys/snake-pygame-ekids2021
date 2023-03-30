@@ -21,8 +21,8 @@ violet = (117, 48, 255)
 dis_width = 800
 dis_height = 600
 pygame.init()
-dis = pygame.display.set_mode(size=(dis_width, dis_height))  # Змінна dis - для роботи з екраном, виводу графіки
-pygame.display.set_caption("Snake game for EKIDS2021")  # Заголовок вікна
+dis = pygame.display.set_mode(size = (dis_width, dis_height))  # Змінна dis - для роботи з екраном, виводу графіки
+pygame.display.set_caption('Snake game for eKids')  # Заголовок вікна
 icon = pygame.image.load('assets/img/head.png')  # Готуємо іконку
 pygame.display.set_icon(icon)  # Встановлюємо віконку
 
