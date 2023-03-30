@@ -5,7 +5,7 @@ import random
 dis_width = 1000
 dis_height = 800
 pygame.init()
-dis = pygame.display.set_mode(size=(dis_width, dis_height))
+dis = pygame.display.set_mode(size = (dis_width, dis_height))
 
 pygame.display.set_caption('Eyes exercises for eKids')
 
