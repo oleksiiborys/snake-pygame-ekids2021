@@ -11,7 +11,7 @@ dis = pygame.display.set_mode(size = (dis_width, dis_height))
 
 pygame.display.set_caption('Snake game for eKids')
 
-snake_speed = 30
+snake_speed = 20
 snake_block = 10
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont(None, 50)
@@ -61,12 +61,12 @@ def gameLoop():  # creating a function
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
                     y1_change = 0
-                elif event.key == pygame.K_RIGHT:
-                    x1_change = snake_block
-                    y1_change = 0
                 elif event.key == pygame.K_UP:
                     y1_change = -snake_block
                     x1_change = 0
+                elif event.key == pygame.K_RIGHT:
+                    x1_change = snake_block
+                    y1_change = 0
                 elif event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0

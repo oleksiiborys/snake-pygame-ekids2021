@@ -11,14 +11,14 @@ dis = pygame.display.set_mode(size = (dis_width, dis_height))
 
 pygame.display.set_caption('Snake game for eKids')
 
-snake_speed = 30
+snake_speed = 15
 snake_block = 10
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont(None, 50)
 
 def message(msg, color):
     rendered_message = font_style.render(msg, True, color)
-    dis.blit(rendered_message, [dis_width / 2, dis_height / 2])
+    dis.blit(rendered_message, [20, 20])
 
 white = (255, 255, 255)
 black = (0, 0, 0)
@@ -42,7 +42,7 @@ def gameLoop():  # creating a function
 
         while game_close == True:
             dis.fill(white)
-            message("You Lost! Press Q-Quit or C-Play Again", red)
+            message("Ви програли! Q-Вихід або C-Грати знову", red)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -59,12 +59,12 @@ def gameLoop():  # creating a function
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
                     y1_change = 0
-                elif event.key == pygame.K_RIGHT:
-                    x1_change = snake_block
-                    y1_change = 0
                 elif event.key == pygame.K_UP:
                     y1_change = -snake_block
                     x1_change = 0
+                elif event.key == pygame.K_RIGHT:
+                    x1_change = snake_block
+                    y1_change = 0
                 elif event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0
