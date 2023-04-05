@@ -60,12 +60,12 @@ def gameLoop():  # creating a function
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
                     y1_change = 0
-                elif event.key == pygame.K_RIGHT:
-                    x1_change = snake_block
-                    y1_change = 0
                 elif event.key == pygame.K_UP:
                     y1_change = -snake_block
                     x1_change = 0
+                elif event.key == pygame.K_RIGHT:
+                    x1_change = snake_block
+                    y1_change = 0
                 elif event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0
