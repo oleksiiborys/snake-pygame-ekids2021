@@ -90,7 +90,7 @@ def gameLoop():  # creating a function
 
         while game_over == True:
             dis.fill(white)
-            message("You Lost! Press C-Play Again or Q-Quit", red)
+            message("Ви програли! Q-Вихід або C-Грати знову", red)
             pygame.display.update()
 
             for event in pygame.event.get():

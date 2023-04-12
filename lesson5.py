@@ -38,14 +38,14 @@ def gameLoop():  # creating a function
     y1_change = 0
 
     length_of_snake = 1
-    food_x = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-    food_y = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
+    foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
+    foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
 
     while not game_close:
 
         while game_over == True:
             dis.fill(white)
-            message("You Lost! Press C-Play Again or Q-Quit", red)
+            message("Ви програли! Q-Вихід або C-Грати знову", red)
             pygame.display.update()
 
             for event in pygame.event.get():
