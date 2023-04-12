@@ -137,7 +137,7 @@ def gameLoop(snake_speed=initial_snake_speed):
         while game_over == True or game_win == True:
             # якщо виграли чи програли виводимо повідомлення і очікуємо дію - почати знову або закрити програму
             if game_over:
-                message("You Lost! Press C-Play Again or Q-Quit", red)
+                message("Ви програли! Q-Вихід або C-Грати знову", red)
             else:
                 dis.fill(orange)
                 message("You Win! Press C-Play Again or Q-Quit", black)

@@ -33,7 +33,7 @@ def your_score(score):
 
 def draw_our_snake(snake_block, snake_list):
     for x in snake_list[0: -1]:
-        pygame.draw.rect(dis, black, [x[0], x[1], snake_block, snake_block])
+        pygame.draw.rect(dis, black, [cell[0], cell[1], snake_block, snake_block])
     pygame.draw.rect(dis, red, [snake_list[-1][0], snake_list[-1][1], snake_block, snake_block])
 
 
@@ -76,7 +76,7 @@ def gameLoop():  # creating a function
 
         while game_over == True:
             dis.fill(white)
-            message("You Lost! Press C-Play Again or Q-Quit", red)
+            message("Ви програли! Q-Вихід або C-Грати знову", red)
             pygame.display.update()
 
             for event in pygame.event.get():
