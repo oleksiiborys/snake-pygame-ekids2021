@@ -33,9 +33,9 @@ white = (255, 255, 255)
 yellow = (255, 255, 102)
 black = (0, 0, 0)
 green = (0, 255, 0)
-blue = (50, 153, 213)
+blue = (0, 0, 255)
 light_blue = (96, 148, 188)
-red = (213, 50, 80)
+red = (255, 0, 0)
 
 def gameLoop():  # creating a function
     game_over = False

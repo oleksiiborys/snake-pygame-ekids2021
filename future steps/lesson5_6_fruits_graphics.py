@@ -3,24 +3,16 @@ import time
 import random
 from assets import fruits
 
-white = (255, 255, 255)
-yellow = (255, 255, 102)
-black = (0, 0, 0)
-green = (0, 255, 0)
-blue = (50, 153, 213)
-light_blue = (96, 148, 188)
-red = (213, 50, 80)
-orange = (255, 165, 48)
-violet = (117, 48, 255)
 
 dis_width = 800
 dis_height = 600
+
 pygame.init()
 dis = pygame.display.set_mode(size = (dis_width, dis_height))
 pygame.display.set_caption('Snake game for eKids')
 
-snake_block = 20
 initial_snake_speed = 10
+snake_block = 20
 clock = pygame.time.Clock()
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
@@ -36,22 +28,30 @@ def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [25,25])
 
-
 def draw_our_snake(snake_block, snake_list):
-    for x in snake_list[0:-1]:
-        dis.blit(snake_body_img, (x[0], x[1]))
+    for cell in snake_list[0:-1]:
+        dis.blit(snake_body_img, (cell[0], cell[1]))
     dis.blit(snake_head_img, (snake_list[-1][0], snake_list[-1][1]))
 
-def message(msg, color, pos_x=dis_width/6, pos_y=dis_height / 3):
+def message(msg, color, pos_x, pos_y):
     rendered_message = font_style.render(msg, True, color)
     dis.blit(rendered_message, [pos_x, pos_y])
 
+white = (255, 255, 255)
+yellow = (255, 255, 102)
+black = (0, 0, 0)
+green = (0, 255, 0)
+blue = (0, 0, 255)
+light_blue = (96, 148, 188)
+red = (255, 0, 0)
+orange = (255, 165, 48)
+violet = (117, 48, 255)
 
 def starting_screen():
     while True:
         for i in range(-10, 1):
             dis.fill(orange)
-            message("Game will start in: " + str(i*(-1)) + " or press r to run the game", violet)
+            message("Game will start in: " + str(i*(-1)) + " or press r to run the game", violet, 20, 20)
             pygame.display.update()
             time.sleep(1)
             if i == 0:
@@ -81,14 +81,14 @@ def gameLoop():  # creating a function
     snake_list = []
     length_of_snake = 1
     level = 1
-    food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
-    food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
+    foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
+    foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
 
     while not game_close:
 
         while game_over == True:
             dis.fill(white)
-            message("Ви програли! Q-Вихід або C-Грати знову", red)
+            message("Ви програли! Q-Вихід або C-Грати знову", red, dis_width/7, dis_height/7)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -107,15 +107,18 @@ def gameLoop():  # creating a function
                 if event.key == pygame.K_LEFT:
                     x1_change = -snake_block
                     y1_change = 0
-                elif event.key == pygame.K_RIGHT:
-                    x1_change = snake_block
-                    y1_change = 0
                 elif event.key == pygame.K_UP:
                     y1_change = -snake_block
                     x1_change = 0
+                elif event.key == pygame.K_RIGHT:
+                    x1_change = snake_block
+                    y1_change = 0
                 elif event.key == pygame.K_DOWN:
                     y1_change = snake_block
                     x1_change = 0
+
+        # if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
+        #     game_close = True
 
         if x1 >= dis_width:
             x1 = 0
@@ -129,7 +132,7 @@ def gameLoop():  # creating a function
         x1 += x1_change
         y1 += y1_change
         dis.blit(background_img, [0, 0])
-        dis.blit(fruits.images[current_fruit], (food_x, food_y))
+        dis.blit(fruits.images[current_fruit], (foodx, foody))
         snake_head = []
         snake_head.append(x1)
         snake_head.append(y1)
@@ -137,8 +140,8 @@ def gameLoop():  # creating a function
         if len(snake_list) > length_of_snake:
             del snake_list[0]
 
-        for x in snake_list[:-1]:
-            if x == snake_head:
+        for cell in snake_list[:-1]:
+            if cell == snake_head:
                 game_over_sound.play()
                 game_over = True
 
@@ -148,12 +151,12 @@ def gameLoop():  # creating a function
 
         pygame.display.update()
 
-        if x1 == food_x and y1 == food_y:
-            print("Yummy!!")
+        if x1 == foodx and y1 == foody:
             apple_sound.play()
+            print("Yummy!!")
             current_fruit = random.randrange(0, len(fruits.images))
-            food_x = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
-            food_y = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
+            foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
+            foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
             length_of_snake += 1
             snake_speed += 1
 

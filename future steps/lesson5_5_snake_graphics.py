@@ -2,8 +2,10 @@ import pygame
 import time
 import random
 
+
 dis_width = 800
 dis_height = 600
+
 pygame.init()
 dis = pygame.display.set_mode(size = (dis_width, dis_height))
 pygame.display.set_caption('Snake game for eKids')
@@ -24,7 +26,6 @@ def your_score(score):
     value = score_font.render("Your Score: " + str(score), True, yellow)
     dis.blit(value, [25,25])
 
-
 def draw_our_snake(snake_block, snake_list):
     for cell in snake_list[0:-1]:
         dis.blit(snake_body_img, (cell[0], cell[1]))
@@ -38,12 +39,11 @@ white = (255, 255, 255)
 yellow = (255, 255, 102)
 black = (0, 0, 0)
 green = (0, 255, 0)
-blue = (50, 153, 213)
+blue = (0, 0, 255)
 light_blue = (96, 148, 188)
-red = (213, 50, 80)
+red = (255, 0, 0)
 orange = (255, 165, 48)
 violet = (117, 48, 255)
-
 
 def starting_screen():
     while True:
@@ -143,6 +143,7 @@ def gameLoop():  # creating a function
         pygame.display.update()
 
         if x1 == foodx and y1 == foody:
+            apple_sound.play()
             print("Yummy!!")
             foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block

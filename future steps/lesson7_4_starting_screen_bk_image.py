@@ -25,7 +25,7 @@ def your_score(score):
 
 
 def draw_our_snake(snake_block, snake_list):
-    for x in snake_list[0:-1]:
+    for cell in snake_list[0:-1]:
         pygame.draw.rect(dis, black, [cell[0], cell[1], snake_block, snake_block])
     pygame.draw.rect(dis, red, [snake_list[-1][0], snake_list[-1][1], snake_block, snake_block])
 
@@ -38,9 +38,9 @@ white = (255, 255, 255)
 yellow = (255, 255, 102)
 black = (0, 0, 0)
 green = (0, 255, 0)
-blue = (50, 153, 213)
+blue = (0, 0, 255)
 light_blue = (96, 148, 188)
-red = (213, 50, 80)
+red = (255, 0, 0)
 orange = (255, 165, 48)
 violet = (117, 48, 255)
 
