@@ -101,8 +101,8 @@ def gameLoop():  # creating a function
         if y1 < 0:
             y1 = dis_height
 
-        x1 += x1_change
-        y1 += y1_change
+        x1 = x1 + x1_change
+        y1 = y1 + y1_change
         dis.fill(light_blue)
         pygame.draw.rect(dis, green, [foodx, foody, snake_block, snake_block])
         snake_head = []
@@ -123,10 +123,10 @@ def gameLoop():  # creating a function
         pygame.display.update()
 
         if x1 == foodx and y1 == foody:
-            apple_sound.play()
             print("Yummy!!")
             foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
+            apple_sound.play()
             length_of_snake += 1
             snake_speed += 1
 

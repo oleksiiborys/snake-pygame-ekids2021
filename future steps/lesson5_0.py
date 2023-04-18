@@ -18,7 +18,7 @@ font_style = pygame.font.SysFont(None, 50)
 
 def draw_our_snake(snake_block, snake_list):
     for cell in snake_list:
-        pygame.draw.rect(dis, black, [cell[0], cell[1], snake_block, snake_block ])
+        pygame.draw.rect(dis, black, [cell[0], cell[1], snake_block, snake_block])
 
 def message(msg, color, pos_x, pos_y):
     rendered_message = font_style.render(msg, True, color)
