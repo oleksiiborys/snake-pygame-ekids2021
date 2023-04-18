@@ -19,7 +19,6 @@ score_font = pygame.font.SysFont("comicsansms", 35)
 background_img = pygame.image.load("assets/img/sand1.jpg")
 apple_sound = pygame.mixer.Sound('assets/sound/apple.wav')
 game_over_sound = pygame.mixer.Sound('assets/sound/gameover.wav')
-level_up_sound = pygame.mixer.Sound('assets/sound/level_up.mp3')
 snake_head_img = pygame.image.load('assets/img/head.png')
 snake_body_img = pygame.image.load('assets/img/body.png')
 
@@ -62,10 +61,6 @@ def starting_screen():
                     if event.key == pygame.K_r:
                         gameLoop()
 
-def your_level(value):
-    value = score_font.render("Your Level: " + str(value), True, yellow)
-    dis.blit(value, [25, 100])
-
 
 def gameLoop():  # creating a function
     game_over = False
@@ -80,7 +75,6 @@ def gameLoop():  # creating a function
 
     snake_list = []
     length_of_snake = 1
-    level = 1
     foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
     foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
 
@@ -129,8 +123,8 @@ def gameLoop():  # creating a function
         if y1 < 0:
             y1 = dis_height
 
-        x1 += x1_change
-        y1 += y1_change
+        x1 = x1 + x1_change
+        y1 = y1 + y1_change
         dis.blit(background_img, [0, 0])
         dis.blit(fruits.images[current_fruit], (foodx, foody))
         snake_head = []
@@ -147,27 +141,17 @@ def gameLoop():  # creating a function
 
         draw_our_snake(snake_block, snake_list)
         your_score(length_of_snake - 1)
-        your_level(level)
 
         pygame.display.update()
 
         if x1 == foodx and y1 == foody:
-            apple_sound.play()
             print("Yummy!!")
             current_fruit = random.randrange(0, len(fruits.images))
             foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
+            apple_sound.play()
             length_of_snake += 1
             snake_speed += 1
-
-            if length_of_snake % 5 == 0:
-                level += 1
-                snake_speed += 5
-                dis.fill(light_blue)
-                message("Level passed!", violet)
-                pygame.display.update()
-                level_up_sound.play()
-                time.sleep(2)
 
         clock.tick(snake_speed)
 
@@ -176,3 +160,4 @@ def gameLoop():  # creating a function
 
 
 starting_screen()
+# gameLoop()

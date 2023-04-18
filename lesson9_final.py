@@ -64,9 +64,9 @@ def your_level(value):
 
 def draw_our_snake(snake_list, level):
     # метод для виводу зображень змійки на екран, використовуються зображення із assets/snake_imgs
-    for x in snake_list[0:-1]:
+    for cell in snake_list[0:-1]:
         # кожна частинка змійки крім голови
-        dis.blit(snake_imgs.bodies[level - 1], (x[0], x[1]))
+        dis.blit(snake_imgs.bodies[level - 1], (cell[0], cell[1]))
     # виводимо голову
     dis.blit(snake_imgs.heads[level - 1], (snake_list[-1][0], snake_list[-1][1]))
 
@@ -145,6 +145,9 @@ def gameLoop(snake_speed=initial_snake_speed):
             pygame.display.update()
 
             for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    game_over = True
+                    exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_q:
                         game_close = True
@@ -198,12 +201,12 @@ def gameLoop(snake_speed=initial_snake_speed):
         snake_head = []
         snake_head.append(x1)
         snake_head.append(y1)
-        snake_list.append(snake_head)  # Додаємо ному позицію до масиву змійки
+        snake_list.append(snake_head)  # Додаємо нову позицію до масиву змійки
         if len(snake_list) > length_of_snake:  # забираємо останню позицію з масиву змійки - змійка перемістилась
             del snake_list[0]
 
-        for x in snake_list[:-1]:  # перевіряємо, чи змійка не вкусила сама себе, для кожної з координат тіла
-            if x == snake_head:  # якщо коордитната тіла рівна голові - вкусила
+        for cell in snake_list[:-1]:  # перевіряємо, чи змійка не вкусила сама себе, для кожної з координат тіла
+            if cell == snake_head:  # якщо коордитната тіла рівна голові - вкусила
                 game_over_sound.play()
                 game_over = True  # і гра закінчується
 
