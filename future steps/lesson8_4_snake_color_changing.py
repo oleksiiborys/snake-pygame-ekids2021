@@ -65,7 +65,7 @@ def starting_screen():
                         gameLoop()
 
 def your_level(value):
-    value = score_font.render("Your Level: " + str(value), True, yellow)
+    value = score_font.render("Ваш рівень: " + str(value), True, yellow)
     dis.blit(value, [25, 100])
 
 

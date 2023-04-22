@@ -76,11 +76,10 @@ def starting_screen():
                         gameLoop(snake_speed=30)
 
 def your_level(value):
-    value = score_font.render("Your Level: " + str(value), True, yellow)
+    value = score_font.render("Ваш рівень: " + str(value), True, yellow)
     dis.blit(value, [25, 100])
 
-
-def gameLoop(snake_speed=initial_snake_speed):
+def gameLoop(snake_speed=initial_snake_speed):  # creating a function
     game_over = False
     game_close = False
     # snake_speed = initial_snake_speed
@@ -120,7 +119,7 @@ def gameLoop(snake_speed=initial_snake_speed):
                         game_over = False
                         exit()
                     if event.key == pygame.K_c:
-                        gameLoop()
+                        starting_screen()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -155,7 +154,7 @@ def gameLoop(snake_speed=initial_snake_speed):
         y1 = y1 + y1_change
         dis.blit(background_img, [0, 0])
         dis.blit(fruits.good[current_fruit], (foodx, foody))
-        if bad_fruit > 0:
+        if bad_fruit >=0:
             dis.blit(fruits.bad[bad_fruit], (bad_food_x, bad_food_y))
         snake_head = []
         snake_head.append(x1)
@@ -194,18 +193,19 @@ def gameLoop(snake_speed=initial_snake_speed):
             foodx = round(random.randrange(0, dis_width - snake_block) / snake_block) * snake_block
             foody = round(random.randrange(0, dis_height - snake_block) / snake_block) * snake_block
 
+
             if length_of_snake == 0:
                 game_over = True
 
             if length_of_snake % relieve_ratio == 0:
                 bad_fruit = random.randrange(0, len(fruits.bad))
                 bad_food_x = snake_list[0][0]
-                bad_food_y = snake_list[0][1]
+                bad_food_y =  snake_list[0][1]
             elif length_of_snake % fruits_per_level == 0 and not game_over:
                 level += 1
                 snake_speed += level_speed_add
                 dis.fill(light_blue)
-                message("Level passed!", violet)
+                message("Рівень пройдено!", violet)
                 pygame.display.update()
                 level_up_sound.play()
                 time.sleep(2)
@@ -217,3 +217,4 @@ def gameLoop(snake_speed=initial_snake_speed):
 
 
 starting_screen()
+# gameLoop()

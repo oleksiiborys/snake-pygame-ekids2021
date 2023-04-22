@@ -15,8 +15,7 @@ initial_snake_speed = 10
 snake_block = 20
 clock = pygame.time.Clock()
 level_speed_add = 3
-fruits_per_level = 3
-levels = 5
+fruits_per_level = 5
 font_style = pygame.font.SysFont("bahnschrift", 25)
 score_font = pygame.font.SysFont("comicsansms", 35)
 background_img = pygame.image.load("assets/img/sand1.jpg")
@@ -77,13 +76,12 @@ def starting_screen():
                         gameLoop(snake_speed=30)
 
 def your_level(value):
-    value = score_font.render("Your Level: " + str(value), True, yellow)
+    value = score_font.render("Ваш рівень: " + str(value), True, yellow)
     dis.blit(value, [25, 100])
 
 
 def gameLoop(snake_speed=initial_snake_speed):
     game_over = False
-    game_win = False
     game_close = False
     # snake_speed = initial_snake_speed
     fruit_eaten = False
@@ -107,15 +105,9 @@ def gameLoop(snake_speed=initial_snake_speed):
 
     while not game_close:
 
-        while game_over == True or game_win == True:
-
-            if game_over:
-                dis.fill(white)
-                message("Ви програли! Q-Вихід або C-Грати знову", red, dis_width/7, dis_height/7)
-            else:
-                dis.fill(orange)
-                message("You Win! Press C-Play Again or Q-Quit", black)
-
+        while game_over == True:
+            dis.fill(white)
+            message("Ви програли! Q-Вихід або C-Грати знову", red, dis_width/7, dis_height/7)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -211,15 +203,12 @@ def gameLoop(snake_speed=initial_snake_speed):
                 bad_food_y = snake_list[0][1]
             elif length_of_snake % fruits_per_level == 0 and not game_over:
                 level += 1
-                if level == levels:  # якщо новий рівень рівний максимальному - перемогу
-                    game_win = True
-                else:
-                    snake_speed += level_speed_add
-                    dis.fill(light_blue)
-                    message("Level passed!", violet)
-                    pygame.display.update()
-                    level_up_sound.play()
-                    time.sleep(2)
+                snake_speed += level_speed_add
+                dis.fill(light_blue)
+                message("Level passed!", violet)
+                pygame.display.update()
+                level_up_sound.play()
+                time.sleep(2)
 
         clock.tick(snake_speed)
 
