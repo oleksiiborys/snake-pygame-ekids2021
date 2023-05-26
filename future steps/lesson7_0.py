@@ -36,7 +36,7 @@ def draw_our_snake(snake_block, snake_list):
         dis.blit(snake_body_img, (cell[0], cell[1]))
     dis.blit(snake_head_img, (snake_list[-1][0], snake_list[-1][1]))
 
-def message(msg, color, pos_x=dis_width/7, pos_y=dis_height / 3):
+def message(msg, color, pos_x = dis_width/7, pos_y = dis_height / 3):
     rendered_message = font_style.render(msg, True, color)
     dis.blit(rendered_message, [pos_x, pos_y])
 
@@ -200,7 +200,7 @@ def gameLoop(snake_speed=initial_snake_speed):  # creating a function
             if length_of_snake % relieve_ratio == 0:
                 bad_fruit = random.randrange(0, len(fruits.bad))
                 bad_food_x = snake_list[0][0]
-                bad_food_y =  snake_list[0][1]
+                bad_food_y = snake_list[0][1]
             elif length_of_snake % fruits_per_level == 0 and not game_over:
                 level += 1
                 snake_speed += level_speed_add

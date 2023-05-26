@@ -80,8 +80,7 @@ def your_level(value):
     value = score_font.render("Ваш рівень: " + str(value), True, yellow)
     dis.blit(value, [25, 100])
 
-
-def gameLoop(snake_speed=initial_snake_speed):
+def gameLoop(snake_speed=initial_snake_speed):  # creating a function
     game_over = False
     game_win = False
     game_close = False
